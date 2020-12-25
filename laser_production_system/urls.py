@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from laser_production_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.show_index_page, name='index'),
+    path('submit_entry', views.submit_entry, name='submit_entry')
 ]
