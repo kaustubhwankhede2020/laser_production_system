@@ -20,5 +20,6 @@ from laser_production_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.show_index_page, name='index'),
-    path('submit_entry', views.submit_entry, name='submit_entry')
+    path('submit_entry', views.submit_entry, name='submit_entry'),
+    path('add_components', views.add_components, name='add_components'),
 ]

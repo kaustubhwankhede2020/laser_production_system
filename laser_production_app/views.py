@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Daily_update
+from .models import Daily_update, Components
 import datetime
 from django.urls import reverse
 from django.contrib import messages
@@ -28,4 +28,20 @@ def submit_entry(request):
         except Exception as e:
             print(e)
             messages.error(request,'Failed to add entry')
+            return HttpResponseRedirect(reverse("index"))
+
+def add_components(request):
+    if request.method != 'POST':
+        return HttpResponse('Method not supported')
+    else:
+        component_type = request.POST.get('component_type_modal')
+        component_lk_number = request.POST.get('component_lk_number_modal')
+        try:
+            Component_data = Components(component_type = component_type, component_lk_number = component_lk_number, created_at = datetime.datetime.now(), updated_at=datetime.datetime.now())
+            Component_data.save()
+            messages.success(request,'Component Added Successfully')
+            return HttpResponseRedirect(reverse('index'))
+        except Exception as e:
+            print(e)
+            messages.error(request,'Failed to add Component')
             return HttpResponseRedirect(reverse("index"))

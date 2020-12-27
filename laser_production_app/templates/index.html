@@ -16,6 +16,22 @@
 <body>
     <h3 class="m-3 text-center">Welcome to Laser Production system</h3>
     <div class="container mt-5">
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Employee No" aria-label="Employee No"
+                                name="employee_no" required autofocus>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Shift Code" aria-label="Shift Code"
+                                name="shift_code" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="card">
             <div class="card-header">
                 Daily Production Entry
@@ -42,44 +58,68 @@
                     {%csrf_token%}
                     <div class="row mt-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Employee Number"
-                                aria-label="Employee Number" name="employee_number">
+                            <input type="text" class="form-control" placeholder="Component Type"
+                                aria-label="Component Type" name="component_type" required>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Shift Code" aria-label="Shift Code"
-                                name="shift_code">
+                            <input type="text" class="form-control" placeholder="Component Lk Number"
+                                aria-label="Component Lk Number" name="component_lk_number" required>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Component Type"
-                                aria-label="Component Type" name="component_type">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Component Lk Number"
-                                aria-label="Component Lk Number" name="component_lk_number">
-                        </div>
-                        <div class="col">
                             <input type="text" class="form-control" placeholder="Component Lot Number"
-                                aria-label="Component Lot Number" name="component_lot_number">
+                                aria-label="Component Lot Number" name="component_lot_number" required>
                         </div>
                         <div class="col">
                             <input type="text" class="form-control" placeholder="Component Quantity"
-                                aria-label="Component Quantity" name="component_quantity">
+                                aria-label="Component Quantity" name="component_quantity" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Add New Component
+                    </button>
                     {% if messages %}
 
                     {% for message in messages %}
                     <div class="alert alert-success mt-3">{{message}}</div>
                     {% endfor %}
-
                     {% endif %}
                 </form>
             </div>
         </div>
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Component</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/add_components" method="post">
+                        {%csrf_token%}
+                        <div class="modal-body">
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Component Type"
+                                        aria-label="Component Type" name="component_type_modal" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Component Lk Number"
+                                        aria-label="Component Lk Number" name="component_lk_number_modal" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <table class="table table-striped mt-4">
             <thead>
                 <tr>
