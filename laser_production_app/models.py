@@ -9,6 +9,8 @@ class Components(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
+    def __str__(self): return self.component_type
+
 class Daily_update(models.Model):
     main_id = models.AutoField(primary_key=True)
     date = models.CharField(max_length=15)

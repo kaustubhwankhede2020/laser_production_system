@@ -7,7 +7,10 @@ from django.contrib import messages
 
 # Create your views here.
 def show_index_page(request):
-    return render(request, 'index.html')
+    component_data = Components.objects.all()
+    print(component_data)
+    context = dict(components = component_data)
+    return render(request, 'index.html', context)
 
 def submit_entry(request):
     if request.method != 'POST':
